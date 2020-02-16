@@ -1,8 +1,8 @@
-# Acquisiamo informazioni sulle condizioni metereologiche con Python
+# Acquisiamo informazioni sulle condizioni meteorologiche con Python
 
 ## Il progetto "Weather Stations"
 
-Nel 2016 la Raspberry foundation ha inviato un migliaio di mini stazioni metereologiche ad alcune scuole sparse per il mondo. Molte di queste stazioni continuano a pubblicare in tempo più o meno reale le informazioni acquisite e sono interrogabili tramite URL.
+Nel 2016 la Raspberry foundation ha inviato un migliaio di mini stazioni meteorologiche ad alcune scuole sparse per il mondo. Molte di queste stazioni continuano a pubblicare in tempo più o meno reale le informazioni acquisite e sono interrogabili tramite URL.
 
 Per esempio per vedere la lista completa delle stazioni disponibili si può utilizzare il seguente URL:
 
@@ -14,7 +14,7 @@ Questo URL però non ritorna una pagina vera e propria come quelle che siamo abi
 
 ## Otteniamo la lista di tutte le stazioni disponibili
 
-Vediamo quindi un primo programma Python che acquisire la lista delle stazioni. Per fare questo utilizzeremo la libreria `requests`, che permette di inviare richieste HTTP in modo molto semplice. La libreria va installata nel PC usato per lo sviluppo tramite il package manager di Python `pip`:
+Vediamo quindi un primo programma Python per acquisire la lista delle stazioni. Per fare questo utilizzeremo la libreria `requests`, che permette di inviare richieste HTTP in modo molto semplice. La libreria va installata nel PC usato per lo sviluppo tramite il package manager di Python `pip`:
 
 ```bash
 python3 -m pip install -U requests
@@ -37,7 +37,7 @@ pprint(stations)
 
 ```
 
-Come si può vedere questo programma stampa una serie di lista di stazioni e per ogni stazione stampa le seguenti informazioni:
+Come si può vedere, questo programma stampa una lista di stazioni e per ogni stazione stampa le seguenti informazioni:
 
  - `weather_stn_id`: un numero che identifica univocamente la stazione
  - `weather_stn_lat`: la latitudine del punto sul globo terreste dove si trova la stazione
@@ -46,7 +46,7 @@ Come si può vedere questo programma stampa una serie di lista di stazioni e per
 
 ## Leggiamo i dati da una stazione
 
-E possibile interrogare una stazione tramite il suo ID. In questo caso l'URL da utilizzare è il seguente:
+È possibile interrogare una stazione tramite il suo ID. In questo caso l'URL da utilizzare è il seguente:
 
 ```
 https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/<station_id>
@@ -82,7 +82,7 @@ pprint(weather)
 
 Supponiamo di voler prelevare le informazioni dalla stazione che si trova alla minima distanza da noi.
 
-Per prima cosa dobbiamo determinare la nostra posizione, ma per fare questo occorre prima sapere come si rappresenta la nostra posizione sul globo terrestre. Abbiamo visto che per rappresentare la posizione delle stazioni sono utilizzati due numeri detti **latitudine** e **longitudine**. Questi numeri detti anche coordinate geografiche rappresentano univocamente un punto sulla superficie terrestre.
+Per prima cosa dobbiamo determinare la nostra posizione, ma per fare questo occorre prima sapere come si rappresenta la nostra posizione sul globo terrestre. Abbiamo visto che per rappresentare la posizione delle stazioni sono utilizzati due numeri detti **latitudine** e **longitudine**. Questi numeri, detti anche coordinate geografiche, rappresentano univocamente un punto sulla superficie terrestre.
 
 Per scoprire le coordinate geografiche del luogo dove ci troviamo possiamo per esempio utilizzare OpenStreetMaps al link https://www.openstreetmap.org/.
 
@@ -91,11 +91,11 @@ Scegliete il punto sulla mappa e cliccando con il pulsante destro scegliere la v
 Per esempio le coordinate di Impact Hub sono le seguenti:
 
 - Latitudine: 43.798135
-- Longintudine: 11.238411
+- Longitudine: 11.238411
 
 ## Determiniamo la stazione alla minima distanza dalla nostra posizione
 
-Per ottenere la stazione alla minima distanza da noi dobbiamo quindi calcolare la distanza sul globo terrestre tra il punto corrisponde alle coordinate geografiche di tutte le stazioni e il punto dove ci troviamo noi e determinare il mimimo.
+Per ottenere la stazione alla minima distanza da noi dobbiamo quindi calcolare la distanza sul globo terrestre tra il punto che corrisponde alle coordinate geografiche di tutte le stazioni e il punto dove ci troviamo noi e determinare il minimo.
 
 Ma come facciamo a calcolare questa distanza? Il calcolo è abbastanza complicato e utilizza la cosidetta formula di Haversine. Noi ci semplifichiamo la vita utilizzando una libreria Python che, oltre a tantissime altre cose, fa anche questo: **GeoPy**.
 
